@@ -13,9 +13,11 @@ Return a deep copy of the list.
  * };
  */
 
+/*
 ## Linked List
 Construct A -> A' -> B -> B' firstly.
-'''
+*/
+
 //Solution 1:
 class Solution {
 public:
@@ -65,9 +67,10 @@ RandomListNode *copyRandomList(RandomListNode *head) {
     return pResult;
 }
 };
-'''
 
-## HashTable
+
+// HashTable
+
 class Solution {
 public:
 RandomListNode* getCloneNode(std::map<RandomListNode*, RandomListNode*>& nodeMap, RandomListNode* head) {
