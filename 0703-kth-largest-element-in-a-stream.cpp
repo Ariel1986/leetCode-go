@@ -91,3 +91,56 @@ class KthLargest {
 
 // M3: Go method
 //  https://leetcode.com/problems/kth-largest-element-in-a-stream/discuss/179019/Min-Heap-implementation-in-Go
+
+package leetCode
+
+import (
+	"container/heap"
+)
+
+type IntHeap []int
+
+func (h IntHeap) Len() int           { return len(h) }
+func (h IntHeap) Less(i, j int) bool { return h[i] < h[j] }
+func (h IntHeap) Swap(i, j int)      { h[i], h[j] = h[j], h[i] }
+func (h *IntHeap) Push(val interface{}) {
+	*h = append(*h, val.(int))
+}
+func (h *IntHeap) Pop() interface{} {
+	result := (*h)[(*h).Len()-1]
+	*h = (*h)[:(*h).Len()-1]
+	return result
+}
+
+type KthLargest struct {
+	Nums *IntHeap
+	K    int
+}
+
+func Constructor(k int, nums []int) KthLargest {
+	result := KthLargest{
+		K:    k,
+		Nums: &IntHeap{},
+	}
+	heap.Init(result.Nums)
+	for _, v := range nums {
+		result.Add(v)
+	}
+	return result
+}
+
+func (this *KthLargest) Add(val int) int {
+	if len(*this.Nums) < this.K {
+		heap.Push(this.Nums, val)
+	} else if val > (*this.Nums)[0] {
+		heap.Push(this.Nums, val)
+		heap.Pop(this.Nums)
+	}
+	return (*this.Nums)[0]
+}
+
+/**
+ * Your KthLargest object will be instantiated and called as such:
+ * obj := Constructor(k, nums);
+ * param_1 := obj.Add(val);
+ */
