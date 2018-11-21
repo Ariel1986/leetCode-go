@@ -28,6 +28,13 @@ A solution set is:
 3. set
 */
 
+/*Test case
+[-1, 0, 1, 2, -1, 4]
+[-2, 0, 1, 1, 2]
+[0,0,0,0]
+[-2,0,0,2,2]
+*/
+
 //M2: two pointer
 class Solution {
 	public:
@@ -73,6 +80,44 @@ class Solution {
 
 
 //M3: set
+//该方法会有超时
+class Solution {
+public:
+    std::vector<std::vector<int>> threeSum(std::vector<int>& nums) {
+        if(nums.size() < 3){
+            return std::vector<std::vector<int>>({});
+        }
+        
+        //避免重复元素
+        std::sort(nums.begin(), nums.end());
+        
+      
+        std::vector<std::vector<int>> res;
+        for(int i = 0, iEnd = nums.size()-2; i < iEnd; i++){
+            if(i > 0 && nums[i] == nums[i-1]){
+                continue;
+            }
+            
+            for(int j = i+1, jEnd = nums.size()-1; j < jEnd; j++){
+                if(j > i+1 && nums[j] == nums[j-1]){
+                    continue;
+                }
+                
+                std::set<int> s;
+                for(int k = j+1, kEnd = nums.size(); k < kEnd; k++){
+                    s.insert(nums[k]);
+                }
+                
+                if(s.find(0-nums[i]-nums[j]) != s.end()){
+                    res.emplace_back(std::vector<int>{nums[i],nums[j],0-nums[i]-nums[j]});
+                }
+            }
+        }
+        
+        return res;
+    }
+};
+
 class Solution {
 	public:
 		std::vector<std::vector<int>> threeSum(std::vector<int>& nums) {
