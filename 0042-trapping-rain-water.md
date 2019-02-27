@@ -158,16 +158,16 @@ Intuition As in Approach 2, instead of computing the left and right parts sepera
 
 Algorithm
 
-Initialize \text{left}left pointer to 0 and \text{right}right pointer to size-1
-While \text{left}< \text{right}left<right, do:
-	If \text{height[left]}height[left] is smaller than \text{height[right]}height[right]
-		If \text{height[left]}>=\text{left_max}, update \text{left_max}
-		Else add \text{left_max}-\text{height[left]} to \text{ans}ans
-		Add 1 to \text{left}left.
+Initialize left pointer to 0 and right pointer to size-1
+While left<right, do:
+	If height[left] is smaller than height[right]
+		If height[left]>=left_max, update left_max
+		Else add left_max-height[left] to ans
+		Add 1 to left.
 	Else
-		If \text{height[right]}>=\text{right_max}, update \text{right_max}
-		Else add \text{right_max}-\text{height[right]} to \text{ans}ans
-		Subtract 1 from \text{right}right.
+		If height[right]>=right_max, update right_max
+		Else add right_max-height[right] ans
+		Subtract 1 from right.
 ```
 ```cpp
 class Solution {
